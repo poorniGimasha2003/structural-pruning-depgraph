@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Full datasets (keep only small samples in data/samples/)
+data/*
+!data/samples/
+!data/README.md
+
+# Model weights and large outputs
+*.pt
+*.pth
+*.ckpt
+*.onnx
+checkpoints/
+runs/
+wandb/
+
+# Mac
+.DS_Store
+
+# Editors
+.vscode/
+.idea/

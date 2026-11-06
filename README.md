@@ -7,7 +7,7 @@
 | **Student** | Pathirage L.P.D.P.G (23/ENG/091) |
 | **Supervisor** | Sanka Mohottala |
 | **External supervisors** | Mr. Asiri Gawesha (SLIIT), Dr. Dinuka Sahabandu (University of Washington) |
-| **Status** | Proposal stage — started October 2026 |
+| **Status** | Proposal stage - started October 2026 |
 
 ## About the project
 

@@ -3,7 +3,47 @@
 Newest entries at the top.
 
 ---
+## 2026-11-16 — Step 03: Build and train a CNN on CIFAR-10
 
+**Did**
+- Built SmallCNN with `nn.Module`: 3 blocks of Conv → BatchNorm → ReLU (32, 64, 128 channels) + MaxPool, global average pool, Linear classifier
+- Inspected parameter shapes and counts
+- Loaded CIFAR-10 (50,000 train / 10,000 test, 10 classes) with augmentation (random crop, horizontal flip) and normalisation
+- Trained for 5 epochs on Colab (T4 GPU) with SGD (lr 0.05, momentum 0.9, weight decay 5e-4)
+- Saved the trained model (`smallcnn_w32.pth`)
+
+**Results**
+- Total parameters: 94,986 (last conv `features.8` = 73,728, about 78%)
+- Output shape for 4 images: [4, 10]
+- Training: loss 1.534 → 0.969, train acc 43.4% → 66.0%, test acc 45.1% → 59.3%
+- About 26 s per epoch on T4 GPU
+
+| Epoch | Loss | Train acc | Test acc |
+|---|---|---|---|
+| 1 | 1.534 | 43.4% | 45.1% |
+| 2 | 1.232 | 55.6% | 53.7% |
+| 3 | 1.105 | 60.7% | 58.5% |
+| 4 | 1.036 | 63.4% | 61.1% |
+| 5 | 0.969 | 66.0% | 59.3% |
+
+**Visual notes**
+
+![SmallCNN architecture](images/phase1/03_smallcnn_architecture.png)
+*SmallCNN layers and how the data shape changes from [1, 3, 32, 32] to [1, 10] (visualisation made with Claude)*
+
+**Learned**
+- `__init__` creates the layers, `forward` defines how data flows through them
+- ReLU and pooling layers have no weights, so they have nothing to prune
+- Conv layers hold most of the parameters, so they matter most for pruning
+- SmallCNN has 3 tied groups: features.0 → .1 → .4 (32), features.4 → .5 → .8 (64), features.8 → .9 → classifier (128)
+- Training loop: guess → loss → backward → update weights
+- Test accuracy (59.3%) is far above random guessing (10%), but 5 epochs is short; lr 0.05 makes test accuracy jump around
+
+**Problems and fixes**
+- SSL certificate error when downloading on Mac → ran "Install Certificates.command" for Python 3.13
+- CIFAR-10 server very slow (about 2 hours on Mac) → trained on Colab instead
+- Two lines joined into one in Colab (SyntaxError) → split into separate lines
+- Made the notebook work on both Mac and Colab (device: cuda / mps / cpu; data folder chosen automatically)
 ## 2026-11-11 — Step 02: Layer shapes and coupling
 
 **Did**

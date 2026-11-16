@@ -4,7 +4,7 @@ Newest entries at the top.
 
 ---
 
-## 2026-11-11 — Week 1, Day 2: Layer shapes and coupling
+## 2026-11-11 — Step 02: Layer shapes and coupling
 
 **Did**
 - Studied the weight shapes of Linear, Conv2d and BatchNorm2d
@@ -20,7 +20,7 @@ Newest entries at the top.
 
 **Visual notes**
 
-![How 3 channels become 7](images/week1/day2_conv_3_to_7_channels.png)
+![How 3 channels become 7](images/phase1/02_conv_3_to_7_channels.png)
 *nn.Conv2d(3, 7): each of the 7 filters has 3 slices (R, G, B), looks at all 3 input channels at the same place, and produces one output channel → [1, 3, 12, 12] becomes [1, 7, 12, 12]. Filters here are hand-made for illustration; in real networks they are learned (visualisation made with Claude)*
 
 **Learned**
@@ -38,8 +38,7 @@ Newest entries at the top.
 
 ---
 
-## 2026-11-09 — Week 1, Day 1: Setup + Tensors
-
+## 2026-11-09 — Step 01: Setup + Tensors
 **Did**
 - Set up VS Code + Jupyter on my Mac (pruning-env, PyTorch 2.15, MPS available)
 - Connected the project folder to the GitHub repo
@@ -51,10 +50,10 @@ Newest entries at the top.
 
 **Visual notes**
 
-![Linear layer weight matrix](images/week1/day1_linear_weight_matrix.png)
+![Linear layer weight matrix](images/phase1/01_linear_weight_matrix.png)
 *Linear(4, 3): each output neuron has one row of weights, so the weight shape is [outputs, inputs] = [3, 4] (visualisation made with Claude)*
 
-![Conv → BN → Conv chain in 3D](images/week1/day1_conv_bn_conv_3d.png)
+![Conv → BN → Conv chain in 3D](images/phase1/01_conv_bn_conv_3d.png)
 *conv1 [8, 3, 3, 3] → 8 feature maps → bn1 [8] → conv2 [16, 8, 3, 3]: the number 8 must match in all three layers (visualisation made with Claude)*
 
 **Learned**
